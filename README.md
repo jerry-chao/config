@@ -38,20 +38,20 @@
 ```
 config-repo/
 ├── m/
-│   ├── application.properties         # 服务A的默认配置
-│   ├── application-dev.properties     # 开发环境配置
-│   ├── application-test.properties    # 测试环境配置
-│   ├── application-gray.properties    # 测试环境配置
-│   └── application-prod.properties    # 生产环境配置
+│   ├── m.properties         # 服务A的默认配置
+│   ├── m-dev.properties     # 开发环境配置
+│   ├── m-test.properties    # 测试环境配置
+│   ├── m-gray.properties    # 测试环境配置
+│   └── m-prod.properties    # 生产环境配置
 └── http/
-    ├── application.properties
-    └── application-{profile}.properties
+    ├── http.properties
+    └── http-{profile}.properties
 ```
 
 #### 2. 配置文件命名规则
 
-- `{application}-{profile}.properties`: 服务特定配置
-- `{application}.properties`: 服务默认配置
+- `{m}-{profile}.properties`: 服务特定配置
+- `{m}.properties`: 服务默认配置
 
 #### 3. 配置更新策略
 
@@ -66,6 +66,12 @@ spring:
       uri: http://config-server:8888
       name: ${spring.application.name}
       profile: ${spring.profiles.active}
+```
+
+##### HTTP接口获取方式
+
+```shell
+curl http://config-server:8888/{m}/{gray}
 ```
 
 ##### 灰度更新
